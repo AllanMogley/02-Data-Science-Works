@@ -1,0 +1,159 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "mount_file_id": "1KBcik5PFeYpAsA6UkdnGyiYkMS6gSGfa",
+      "authorship_tag": "ABX9TyORD0b33bM0/gJqTXix0xKP",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/AllanMogley/02-Data-Science-Works/blob/main/03_TensorFlow_YOLO_V3/YOLO_v3\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## Navigate to a Folder within Drive\n",
+        "(You may skip this part of the code if youre just testing stuff out)"
+      ],
+      "metadata": {
+        "id": "Be_zntOJWg1f"
+      }
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "5sR0pnAHTcy_"
+      },
+      "outputs": [],
+      "source": [
+        "%cd /content/drive/MyDrive/06 - Codes"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "1. Fork a *Repository*"
+      ],
+      "metadata": {
+        "id": "d38wK4FDWxyh"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!git clone https://github.com/YunYang1994/tensorflow-yolov3.git"
+      ],
+      "metadata": {
+        "id": "wRAx9hrQWNG8"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "2. Install Some dependencies before setting out your hands on these codes"
+      ],
+      "metadata": {
+        "id": "bdbW4E08XTlG"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%cd tensorflow-yolov3\n",
+        "!pip install -r ./docs/requirements.txt"
+      ],
+      "metadata": {
+        "id": "50lOpYViXOuT"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "3. Exporting loaded COCO weights as TF checkpoint(yolov3_coco.ckpt)【BaiduCloud】"
+      ],
+      "metadata": {
+        "id": "izjhTKUdZB5W"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%cd checkpoint\n",
+        "!wget https://github.com/YunYang1994/tensorflow-yolov3/releases/download/v1.0/yolov3_coco.tar.gz\n",
+        "!tar -xvf yolov3_coco.tar.gz\n",
+        "%cd ..\n",
+        "!python convert_weight.py\n",
+        "!python freeze_graph.py"
+      ],
+      "metadata": {
+        "id": "02NUWi4mYeMt"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "4. Then you will get some .pb files in the root path., and run the demo script"
+      ],
+      "metadata": {
+        "id": "MyfiITFzaKb_"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!python image_demo.py\n",
+        "# !python video_demo.py # if use camera, set video_path = 0"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "YFUUxz76aN17",
+        "outputId": "0b80681b-4ce4-4733-b66e-be7a604b8ecc"
+      },
+      "execution_count": 22,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "2023-08-04 21:20:08.470355: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.\n",
+            "To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.\n",
+            "2023-08-04 21:20:09.393017: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT\n",
+            "Traceback (most recent call last):\n",
+            "  File \"/content/drive/MyDrive/06 - Codes/tensorflow-yolov3/image_demo.py\", line 33, in <module>\n",
+            "    return_tensors = utils.read_pb_return_tensors(graph, pb_file, return_elements)\n",
+            "  File \"/content/drive/MyDrive/06 - Codes/tensorflow-yolov3/core/utils.py\", line 122, in read_pb_return_tensors\n",
+            "    with tf.gfile.FastGFile(pb_file, 'rb') as f:\n",
+            "AttributeError: module 'tensorflow' has no attribute 'gfile'. Did you mean: 'fill'?\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
