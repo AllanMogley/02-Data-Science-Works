@@ -9,5 +9,6 @@
             "database": "luxdev",
             "username": "postgres"
         }
-    ]
+    ],
+    "python.analysis.typeCheckingMode": "basic"
 }
