@@ -1,0 +1,3 @@
+SELECT 
+
+SELECT * from restaurants;
