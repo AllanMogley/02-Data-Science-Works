@@ -5,9 +5,9 @@ import numpy as np
 
 housing = pd.read_csv(Path('../Data/housing.csv'))
 
-housing['income_cat'] = pd.cut(housing['median_income']),
-                        bins = [1, 1.5, 3, 4.5, 6, np.inf],
-                        labels = [1, 2, 3, 4, 5]
+housing['income_cat'] = pd.cut(housing['median_income'],
+        bins = [0., 1.5, 3.0, 4.5, 6., np.inf],
+        labels = [1, 2, 3, 4, 5])
 
 strat_train_set, strat_test_set = train_test_split(
         housing, test_size = 0.2,
